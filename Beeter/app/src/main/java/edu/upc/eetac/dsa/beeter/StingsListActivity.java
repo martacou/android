@@ -1,5 +1,6 @@
 package edu.upc.eetac.dsa.beeter;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -38,9 +39,23 @@ public class StingsListActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_stings_list);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+        // setSupportActionBar(toolbar);
         adapter = new StingCollectionAdapter(this, stings);
         //list.setAdapter(adapter);
+        ListView list = (ListView)findViewById(R.id.list);
+
+        list.setAdapter(adapter);
+        // set list OnItemClick listener
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(StingsListActivity.this, StingDetailActivity.class);
+                String uri = BeeterClient.getLink(stings.getStings().get(position).getLinks(), "self").getUri().toString();
+                intent.putExtra("uri", uri);
+                startActivity(intent);
+            }
+        });
+
         // Execute AsyncTask
         mGetStingsTask = new GetStingsTask(null);
         mGetStingsTask.execute((Void) null);
@@ -72,9 +87,9 @@ public class StingsListActivity extends AppCompatActivity{
         protected void onPostExecute(String jsonStingCollection) {
             Log.d(TAG, "onPostExecute");
             Log.d(TAG, jsonStingCollection);
-            ListView list = (ListView)findViewById(R.id.list);
+            //ListView list = (ListView)findViewById(R.id.list);
 
-            list.setAdapter(adapter);
+            //list.setAdapter(adapter);
             StingCollection stingCollection = (new Gson()).fromJson(jsonStingCollection, StingCollection.class);
             Log.d(TAG, jsonStingCollection);
             int count = 1;

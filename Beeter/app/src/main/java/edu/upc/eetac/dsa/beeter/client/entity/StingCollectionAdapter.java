@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.content.Context;
@@ -33,7 +32,7 @@ public class StingCollectionAdapter extends BaseAdapter {
             this.textViewAutor = (TextView) row
                     .findViewById(R.id.textViewAutor);
             this.textViewSubject = (TextView) row
-                    .findViewById(R.id.textViewSubject);
+                    .findViewById(R.id.textViewAsunto);
             //this.textViewDate = (TextView) row.findViewById(R.id.textViewDate);
         }
     }

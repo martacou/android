@@ -60,7 +60,10 @@ public class BeeterClient {
     public Root getRoot() {
         return root;
     }
-
+    public String getSting(String uri) throws BeeterClientException {
+        return null;
+        //TODO:implementarlo
+    }
     public final static Link getLink(List<Link> links, String rel){
         for(Link link : links){
             if(link.getRels().contains(rel)) {
